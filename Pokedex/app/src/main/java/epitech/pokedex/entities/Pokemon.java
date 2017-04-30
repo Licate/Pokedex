@@ -9,8 +9,8 @@ public class Pokemon {
     private ArrayList<String> types_name;
     // Juste une image, la default_front
     private String default_sprite;
-    private String height;
-    private String weight;
+    private int height;
+    private int weight;
 
     public String getName() {
         return name;
@@ -44,19 +44,19 @@ public class Pokemon {
         this.types_name = types;
     }
 
-    public String getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public String getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 }
