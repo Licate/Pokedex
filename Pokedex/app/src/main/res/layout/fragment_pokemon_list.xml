@@ -1,19 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="epitech.pokedex.fragments.PokemonListFragment">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ListView android:id="@id/android:list"
+    <ListView android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#720000"
-        android:layout_weight="1"
-        android:drawSelectorOnTop="false"/>
+        android:background="#ffb7b7" />
 
     <TextView android:id="@id/android:empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e57373"
+        android:background="#ffb7b7"
         android:text="No data - POKEMON"/>
-</FrameLayout>
+</LinearLayout>

@@ -6,12 +6,10 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp">
 
-    <ListView android:id="@id/android:list"
+    <ListView android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000f72"
-        android:layout_weight="1"
-        android:drawSelectorOnTop="false"/>
+        android:background="#e0f7fa" />
 
     <TextView android:id="@id/android:empty"
         android:layout_width="match_parent"
