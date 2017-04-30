@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import epitech.pokedex.fragments.BerryListFragment;
+import epitech.pokedex.fragments.ItemListFragment;
+import epitech.pokedex.fragments.PokemonListFragment;
 
 public class PokemonActivity extends AppCompatActivity {
 
@@ -25,7 +28,7 @@ public class PokemonActivity extends AppCompatActivity {
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         addDrawerItems();
-        getSupportActionBar().setTitle("Pokemon");
+        getSupportActionBar().setTitle("Pokedex");
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -35,9 +38,15 @@ public class PokemonActivity extends AppCompatActivity {
                     fragment.setArguments(args);
                     selectView(position, fragment, "Items");
                 } else if (pkArray[((int) id)] == "Berries") {
-                    
+                    Fragment fragment = new BerryListFragment();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
+                    selectView(position, fragment, "Berries");
                 } else if (pkArray[((int) id)] == "Pokemon") {
-
+                    Fragment fragment = new PokemonListFragment();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
+                    selectView(position, fragment, "Pokemon");
                 }
             }
         });
