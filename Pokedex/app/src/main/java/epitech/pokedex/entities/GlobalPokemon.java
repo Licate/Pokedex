@@ -1,6 +1,6 @@
 package epitech.pokedex.entities;
 
-public class Global_pokemon {
+public class GlobalPokemon {
 
     private int id;
     private String name;
