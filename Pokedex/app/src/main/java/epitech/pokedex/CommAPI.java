@@ -109,12 +109,12 @@ public class CommAPI {
                     res = obj.path("results");
                     if (res.isArray()) {
                         for (final JsonNode objNode : res) {
-                            JsonNode pokenode = mapper.readTree(this.getRequest(objNode.path("url").asText()));
+                            String[] purl = objNode.path("url").asText().split("/");
+                            String id = purl[purl.length-1];
                             GlobalPokemon tmp = new GlobalPokemon();
-                            JsonNode spritenode = pokenode.path("sprites");
-                            tmp.setDefault_sprite(spritenode.path("front_default").asText());
-                            tmp.setId(pokenode.path("id").asInt());
-                            tmp.setName(pokenode.path("name").asText());
+                            tmp.setName(objNode.path("name").asText());
+                            tmp.setId(Integer.valueOf(id));
+                            tmp.setDefault_sprite("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+id+".png");
                             pokemons.add(tmp);
                         }
                     }

@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import epitech.pokedex.R;
 import epitech.pokedex.adapters.PokemonAdapter;
@@ -42,7 +43,13 @@ public class PokemonListFragment extends Fragment {
         data.add(dracofeu);
 
         CommAPI api = new CommAPI();
-        adapter = new PokemonAdapter(getActivity(), data);//api.GetPokemons());
+        try {
+            adapter = new PokemonAdapter(getActivity(), api.new GetPokemons().execute().get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         mListView.setAdapter(adapter);
 
         return view;
