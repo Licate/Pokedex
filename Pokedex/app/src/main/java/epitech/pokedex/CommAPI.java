@@ -82,7 +82,7 @@ public class CommAPI {
         }
     }*/
 
-    public class GetPokemon extends AsyncTask<Void, Void, List<GlobalPokemon>> {
+    public class GetPokemons extends AsyncTask<Void, Void, List<GlobalPokemon>> {
 
         private String getRequest(String param) {
             Request request = new Request.Builder()
