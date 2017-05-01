@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import epitech.pokedex.R;
+import epitech.pokedex.adapters.PokemonAdapter;
+import epitech.pokedex.entities.GlobalPokemon;
 import epitech.pokedex.entities.Pokemon;
 
 public class PokemonListFragment extends Fragment {
@@ -21,20 +23,25 @@ public class PokemonListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // TEST avant connexion à l'api
-        Pokemon pikachu = new Pokemon();
+        GlobalPokemon pikachu = new GlobalPokemon();
         pikachu.setId(1);
         pikachu.setName("Pikachu");
         pikachu.setDefault_sprite("http://pokeapi.co/media/sprites/pokemon/12.png");
 
+        GlobalPokemon dracofeu = new GlobalPokemon();
+        dracofeu.setId(1);
+        dracofeu.setName("Dracofeu");
+        dracofeu.setDefault_sprite("http://pokeapi.co/media/sprites/pokemon/11.png");
         //A supprimer une fois la connexion faite
 
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
 
-        List<Pokemon> data = new ArrayList<Pokemon>();
+        List<GlobalPokemon> data = new ArrayList<GlobalPokemon>();
         data.add(pikachu);
-        ArrayAdapter<Pokemon> adapter = new ArrayAdapter<Pokemon>(getActivity(),
-                android.R.layout.simple_list_item_1, data);
+        data.add(dracofeu);
+
+        PokemonAdapter adapter = new PokemonAdapter(getActivity(), data);
         mListView.setAdapter(adapter);
         return view;
     }

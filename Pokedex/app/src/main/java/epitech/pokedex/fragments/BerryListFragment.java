@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import epitech.pokedex.R;
-import epitech.pokedex.entities.Berry;
+import epitech.pokedex.adapters.BerryAdapter;
+import epitech.pokedex.entities.GlobalBerry;
 
 public class BerryListFragment extends Fragment {
     ListView mListView;
@@ -20,18 +20,17 @@ public class BerryListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // TEST avant connexion à l'api
-        Berry b = new Berry();
+        GlobalBerry b = new GlobalBerry();
         b.setName("Strawberry");
-        b.setId(1);
         //A supprimer une fois la connexion faite
 
         View view = inflater.inflate(R.layout.fragment_berry_list, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
 
-        List<Berry> data = new ArrayList<Berry>();
+        List<GlobalBerry> data = new ArrayList<GlobalBerry>();
         data.add(b);
-        ArrayAdapter<Berry> adapter = new ArrayAdapter<Berry>(getActivity(),
-                android.R.layout.simple_list_item_1, data);
+
+        BerryAdapter adapter = new BerryAdapter(getActivity(), data);
         mListView.setAdapter(adapter);
         return view;
     }

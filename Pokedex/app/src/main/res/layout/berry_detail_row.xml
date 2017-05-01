@@ -6,21 +6,12 @@
     android:padding="10dp"
     >
 
-    <ImageView
-        android:id="@+id/sprite"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        tools:background="#AAA"
-        />
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/sprite"
-        android:layout_alignTop="@+id/sprite"
         android:textStyle="bold"
         tools:text="Name"
         />
