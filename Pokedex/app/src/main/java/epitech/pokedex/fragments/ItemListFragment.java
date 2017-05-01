@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import epitech.pokedex.R;
+import epitech.pokedex.adapters.ItemAdapter;
+import epitech.pokedex.entities.GlobalItem;
 import epitech.pokedex.entities.Item;
 
 public class ItemListFragment extends Fragment {
@@ -21,7 +23,7 @@ public class ItemListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // TEST avant connexion à l'api
-        Item pokeball = new Item();
+        GlobalItem pokeball = new GlobalItem();
         pokeball.setId(1);
         pokeball.setName("Pokeball");
         pokeball.setDefault_sprite("http://pokeapi.co/media/sprites/items/master-ball.png");
@@ -30,10 +32,10 @@ public class ItemListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
 
-        List<Item> data = new ArrayList<Item>();
+        List<GlobalItem> data = new ArrayList<GlobalItem>();
         data.add(pokeball);
-        ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(getActivity(),
-                android.R.layout.simple_list_item_1, data);
+
+        ItemAdapter adapter = new ItemAdapter(getActivity(), data);
         mListView.setAdapter(adapter);
         return view;
     }
