@@ -1,13 +1,16 @@
 package epitech.pokedex.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -27,18 +30,22 @@ public class PokemonAdapter extends ArrayAdapter<GlobalPokemon>{
         }
 
         PokemonViewHolder viewHolder = (PokemonViewHolder) convertView.getTag();
-        if(viewHolder == null){
+        if (viewHolder == null) {
             viewHolder = new PokemonViewHolder();
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.sprite = (ImageView) convertView.findViewById(R.id.sprite);
             convertView.setTag(viewHolder);
         }
 
+
         GlobalPokemon pokemon = getItem(position);
         viewHolder.name.setText(pokemon.getName());
-        // TODO : Transform String url into Drawable
-        viewHolder.sprite.setImageDrawable(new ColorDrawable());
-
+        Picasso instance = new Picasso.Builder(parent.getContext())
+                .downloader(new OkHttpDownloader(parent.getContext()))
+                .build();
+        instance.load(pokemon.getDefault_sprite())
+                .fit()
+                .into(viewHolder.sprite);
         return convertView;
     }
 

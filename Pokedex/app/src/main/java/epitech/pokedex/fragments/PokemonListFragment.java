@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,10 +13,11 @@ import java.util.List;
 import epitech.pokedex.R;
 import epitech.pokedex.adapters.PokemonAdapter;
 import epitech.pokedex.entities.GlobalPokemon;
-import epitech.pokedex.entities.Pokemon;
+import epitech.pokedex.CommAPI;
 
 public class PokemonListFragment extends Fragment {
     ListView mListView;
+    PokemonAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,8 +41,10 @@ public class PokemonListFragment extends Fragment {
         data.add(pikachu);
         data.add(dracofeu);
 
-        PokemonAdapter adapter = new PokemonAdapter(getActivity(), data);
+        CommAPI api = new CommAPI();
+        adapter = new PokemonAdapter(getActivity(), data);//api.GetPokemons());
         mListView.setAdapter(adapter);
+
         return view;
     }
 }
