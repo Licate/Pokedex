@@ -9,7 +9,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import epitech.pokedex.CommAPI;
 import epitech.pokedex.R;
 import epitech.pokedex.adapters.BerryAdapter;
 import epitech.pokedex.entities.GlobalBerry;
@@ -30,7 +32,15 @@ public class BerryListFragment extends Fragment {
         List<GlobalBerry> data = new ArrayList<GlobalBerry>();
         data.add(b);
 
-        BerryAdapter adapter = new BerryAdapter(getActivity(), data);
+        CommAPI api = new CommAPI();
+        BerryAdapter adapter = null;
+        try {
+            adapter = new BerryAdapter(getActivity(), api.new GetBerries().execute().get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         mListView.setAdapter(adapter);
         return view;
     }

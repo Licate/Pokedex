@@ -10,7 +10,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import epitech.pokedex.CommAPI;
 import epitech.pokedex.R;
 import epitech.pokedex.adapters.ItemAdapter;
 import epitech.pokedex.entities.GlobalItem;
@@ -35,7 +37,15 @@ public class ItemListFragment extends Fragment {
         List<GlobalItem> data = new ArrayList<GlobalItem>();
         data.add(pokeball);
 
-        ItemAdapter adapter = new ItemAdapter(getActivity(), data);
+        CommAPI api = new CommAPI();
+        ItemAdapter adapter = null;
+        try {
+            adapter = new ItemAdapter(getActivity(), api.new GetItems().execute().get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         mListView.setAdapter(adapter);
         return view;
     }

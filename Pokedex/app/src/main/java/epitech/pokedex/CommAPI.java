@@ -16,6 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 
 
+import epitech.pokedex.entities.GlobalBerry;
+import epitech.pokedex.entities.GlobalItem;
 import epitech.pokedex.entities.GlobalPokemon;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -82,29 +84,28 @@ public class CommAPI {
         }
     }*/
 
-    public class GetPokemons extends AsyncTask<Void, Void, List<GlobalPokemon>> {
-
-        private String getRequest(String param) {
-            Request request = new Request.Builder()
-                    .url(param)
-                    .build();
-            Response response;
-            try {
-                response = client.newCall(request).execute();
-                return response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
+    private String getRequest(String param) {
+        Request request = new Request.Builder()
+                .url(param)
+                .build();
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return null;
+    }
 
+    public class GetPokemons extends AsyncTask<Void, Void, List<GlobalPokemon>> {
         @Override
         protected List<GlobalPokemon> doInBackground(Void... params) {
             List<GlobalPokemon> pokemons = new ArrayList<GlobalPokemon>();
 
             try {
                 JsonNode res;
-                JsonNode obj = mapper.readTree(this.getRequest(url + "pokemon"));
+                JsonNode obj = mapper.readTree(getRequest(url + "pokemon"));
                 for (String next = obj.path("next").textValue(); next != null; next = obj.path("next").textValue()) {
                     res = obj.path("results");
                     if (res.isArray()) {
@@ -118,7 +119,66 @@ public class CommAPI {
                             pokemons.add(tmp);
                         }
                     }
-                    obj = mapper.readTree(this.getRequest(next));
+                    obj = mapper.readTree(getRequest(next));
+                }
+                return pokemons;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+    public class GetItems extends AsyncTask<Void, Void, List<GlobalItem>> {
+        @Override
+        protected List<GlobalItem> doInBackground(Void... params) {
+            List<GlobalItem> items = new ArrayList<GlobalItem>();
+
+            try {
+                JsonNode res;
+                JsonNode obj = mapper.readTree(getRequest(url + "item"));
+                for (String next = obj.path("next").textValue(); next != null; next = obj.path("next").textValue()) {
+                    res = obj.path("results");
+                    if (res.isArray()) {
+                        for (final JsonNode objNode : res) {
+                            String[] purl = objNode.path("url").asText().split("/");
+                            String id = purl[purl.length-1];
+                            GlobalItem tmp = new GlobalItem();
+                            tmp.setName(objNode.path("name").asText());
+                            tmp.setId(Integer.valueOf(id));
+                            tmp.setDefault_sprite("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/"+tmp.getName()+".png");
+                            items.add(tmp);
+                        }
+                    }
+                    obj = mapper.readTree(getRequest(next));
+                }
+                return items;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+    public class GetBerries extends AsyncTask<Void, Void, List<GlobalBerry>> {
+        @Override
+        protected List<GlobalBerry> doInBackground(Void... params) {
+            List<GlobalBerry> pokemons = new ArrayList<GlobalBerry>();
+
+            try {
+                JsonNode res;
+                JsonNode obj = mapper.readTree(getRequest(url + "berry"));
+                for (String next = obj.path("next").textValue(); next != null; next = obj.path("next").textValue()) {
+                    res = obj.path("results");
+                    if (res.isArray()) {
+                        for (final JsonNode objNode : res) {
+                            String[] purl = objNode.path("url").asText().split("/");
+                            String id = purl[purl.length-1];
+                            GlobalBerry tmp = new GlobalBerry();
+                            tmp.setName(objNode.path("name").asText());
+                            tmp.setId(Integer.valueOf(id));
+                            pokemons.add(tmp);
+                        }
+                    }
+                    obj = mapper.readTree(getRequest(next));
                 }
                 return pokemons;
             } catch (Exception e) {
