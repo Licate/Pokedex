@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import epitech.pokedex.apicomms.GetPokemon;
 import epitech.pokedex.R;
 import epitech.pokedex.adapters.PokemonAdapter;
-import epitech.pokedex.entities.GlobalPokemon;
-import epitech.pokedex.CommAPI;
 
 public class PokemonListFragment extends Fragment {
     ListView mListView;
@@ -26,9 +23,11 @@ public class PokemonListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
 
-        CommAPI api = new CommAPI();
+        GetPokemon pokeapi = new GetPokemon();
+
+
         try {
-            adapter = new PokemonAdapter(getActivity(), api.new GetPokemons().execute().get());
+            adapter = new PokemonAdapter(getActivity(), pokeapi.new Global().execute().get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

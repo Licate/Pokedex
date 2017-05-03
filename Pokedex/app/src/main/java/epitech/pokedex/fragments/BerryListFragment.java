@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import epitech.pokedex.CommAPI;
+import epitech.pokedex.apicomms.CommAPI;
 import epitech.pokedex.R;
 import epitech.pokedex.adapters.BerryAdapter;
+import epitech.pokedex.apicomms.GetBerry;
 import epitech.pokedex.entities.GlobalBerry;
 
 public class BerryListFragment extends Fragment {
@@ -32,10 +33,10 @@ public class BerryListFragment extends Fragment {
         List<GlobalBerry> data = new ArrayList<GlobalBerry>();
         data.add(b);
 
-        CommAPI api = new CommAPI();
+        GetBerry berryapi = new GetBerry();
         BerryAdapter adapter = null;
         try {
-            adapter = new BerryAdapter(getActivity(), api.new GetBerries().execute().get());
+            adapter = new BerryAdapter(getActivity(), berryapi.new Global().execute().get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
