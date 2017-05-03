@@ -4,9 +4,11 @@ import android.os.AsyncTask;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import epitech.pokedex.entities.Berry;
 import epitech.pokedex.entities.GlobalBerry;
 
 /**
@@ -42,6 +44,24 @@ public class GetBerry extends CommAPI {
                 e.printStackTrace();
                 return null;
             }
+        }
+    }
+
+    public class Detail extends AsyncTask<String, Void, Berry> {
+        @Override
+        protected Berry doInBackground(String... params) {
+            Berry berry = new Berry();
+            try {
+                JsonNode obj = mapper.readTree(getRequest(url + "berry/" + params[0]));
+                berry.setId(obj.path("id").asInt());
+                berry.setName(obj.path("name").asText());
+                berry.setGrowth_time(obj.path("growth_time").asInt());
+                berry.setSize(obj.path("size").asInt());
+                berry.setSmoothness(obj.path("smoothness").asInt());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return berry;
         }
     }
 }
