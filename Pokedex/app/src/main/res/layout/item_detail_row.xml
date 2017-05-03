@@ -20,8 +20,7 @@
         android:textColor="@android:color/black"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/sprite"
-        android:layout_alignTop="@+id/sprite"
-        android:textStyle="bold"
+        android:textSize="18sp"
         tools:text="Name"
         />
 

@@ -14,15 +14,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import epitech.pokedex.fragments.BerryDetailFragment;
 import epitech.pokedex.fragments.BerryListFragment;
+import epitech.pokedex.fragments.ItemDetailFragment;
 import epitech.pokedex.fragments.ItemListFragment;
+import epitech.pokedex.fragments.PokemonDetailFragment;
 import epitech.pokedex.fragments.PokemonListFragment;
 
 public class PokemonActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
-    private String[] pkArray = { "Pokemon", "Items", "Berries"};
+    private String[] pkArray = { "Pokemon", "Items", "Berries", "Berry"};
     private DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -52,6 +55,12 @@ public class PokemonActivity extends AppCompatActivity {
                     Bundle args = new Bundle();
                     fragment.setArguments(args);
                     selectView(position, fragment, "Pokemon");
+                }
+                else if (pkArray[((int) id)] == "Berry") {
+                    Fragment fragment = new BerryDetailFragment();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
+                    selectView(position, fragment, "Berry Example");
                 }
             }
         });

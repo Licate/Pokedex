@@ -24,18 +24,8 @@ public class ItemListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // TEST avant connexion à l'api
-        GlobalItem pokeball = new GlobalItem();
-        pokeball.setId(1);
-        pokeball.setName("Pokeball");
-        pokeball.setDefault_sprite("http://pokeapi.co/media/sprites/items/master-ball.png");
-        //A supprimer une fois la connexion faite
-
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
-
-        List<GlobalItem> data = new ArrayList<GlobalItem>();
-        data.add(pokeball);
 
         CommAPI api = new CommAPI();
         ItemAdapter adapter = null;

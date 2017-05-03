@@ -23,24 +23,8 @@ public class PokemonListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // TEST avant connexion à l'api
-        GlobalPokemon pikachu = new GlobalPokemon();
-        pikachu.setId(1);
-        pikachu.setName("Pikachu");
-        pikachu.setDefault_sprite("http://pokeapi.co/media/sprites/pokemon/12.png");
-
-        GlobalPokemon dracofeu = new GlobalPokemon();
-        dracofeu.setId(1);
-        dracofeu.setName("Dracofeu");
-        dracofeu.setDefault_sprite("http://pokeapi.co/media/sprites/pokemon/11.png");
-        //A supprimer une fois la connexion faite
-
         View view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
-
-        List<GlobalPokemon> data = new ArrayList<GlobalPokemon>();
-        data.add(pikachu);
-        data.add(dracofeu);
 
         CommAPI api = new CommAPI();
         try {
