@@ -5,6 +5,7 @@ public class Berry {
     private String name;
     private int growth_time;
     private int size;
+    private int smoothness;
 
 
     public int getId() {
@@ -37,5 +38,13 @@ public class Berry {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public int getSmoothness() {
+        return smoothness;
+    }
+
+    public void setSmoothness(int smoothness) {
+        this.smoothness = smoothness;
     }
 }
