@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import epitech.pokedex.PokemonActivity;
@@ -19,6 +20,8 @@ import epitech.pokedex.entities.GlobalPokemon;
 public class PokemonListFragment extends Fragment {
     ListView mListView;
     PokemonAdapter adapter;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,13 +31,15 @@ public class PokemonListFragment extends Fragment {
 
         GetPokemon pokeapi = new GetPokemon();
         final PokemonActivity activity = (PokemonActivity) getActivity();
-        try {
-            adapter = new PokemonAdapter(activity, pokeapi.new Global().execute().get());
+        /*try {
+            adapter = new PokemonAdapter(activity, pokeapi.new Global(adapter).execute().get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
+        adapter = new PokemonAdapter(activity, new ArrayList<GlobalPokemon>());
+        pokeapi.new Global(adapter).execute();
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
