@@ -6,21 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import epitech.pokedex.R;
-import epitech.pokedex.adapters.PokemonAdapter;
 import epitech.pokedex.apicomms.GetPokemon;
 import epitech.pokedex.entities.Pokemon;
 
@@ -77,7 +71,6 @@ public class PokemonDetailFragment extends Fragment {
             TextView ab3 = (TextView) view.findViewById(R.id.ab3);
             ab3.setText(" - " + pokemon.getTypes_name().get(2).toString());
         }
-        String toto = pokemon.getTypes_name().get(0);
         return view;
     }
 

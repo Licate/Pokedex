@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import epitech.pokedex.PokemonActivity;
 import epitech.pokedex.apicomms.GetPokemon;
@@ -31,13 +30,7 @@ public class PokemonListFragment extends Fragment {
 
         GetPokemon pokeapi = new GetPokemon();
         final PokemonActivity activity = (PokemonActivity) getActivity();
-        /*try {
-            adapter = new PokemonAdapter(activity, pokeapi.new Global(adapter).execute().get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }*/
+
         adapter = new PokemonAdapter(activity, new ArrayList<GlobalPokemon>());
         pokeapi.new Global(adapter).execute();
         mListView.setAdapter(adapter);
