@@ -6,7 +6,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import epitech.pokedex.fragments.BerryDetailFragment;
 import epitech.pokedex.fragments.BerryListFragment;
-import epitech.pokedex.fragments.ItemDetailFragment;
 import epitech.pokedex.fragments.ItemListFragment;
-import epitech.pokedex.fragments.PokemonDetailFragment;
 import epitech.pokedex.fragments.PokemonListFragment;
 
 public class PokemonActivity extends AppCompatActivity {
@@ -74,7 +70,6 @@ public class PokemonActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         };
-
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
@@ -106,6 +101,7 @@ public class PokemonActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
+                .addToBackStack("main")
                 .commit();
 
         mDrawerList.setItemChecked(position, true);
@@ -117,6 +113,7 @@ public class PokemonActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
+                .addToBackStack("main")
                 .commit();
         getSupportActionBar().setTitle(title);
     }
