@@ -77,10 +77,13 @@ public class GetPokemon extends CommAPI {
                 JsonNode obj = mapper.readTree(getRequest(url + "pokemon/" + params[0]));
                 pokemon.setId(obj.path("id").asInt());
                 pokemon.setName(obj.path("name").asText());
-                JsonNode typenodes = obj.path("types").path("type");
+                JsonNode typenodes = obj.path("types");
                 ArrayList<String> types = new ArrayList<String>();
                 for (JsonNode type : typenodes) {
-                    types.add(type.path("name").asText());
+                    JsonNode typenode = type.path("type");
+                    if (!typenode.isMissingNode()) {
+                        types.add(typenode.path("name").asText());
+                    }
                 }
                 pokemon.setTypes_name(types);
                 JsonNode sprites = obj.path("sprites");
