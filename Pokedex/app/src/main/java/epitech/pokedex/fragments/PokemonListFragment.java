@@ -49,7 +49,8 @@ public class PokemonListFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putInt("id", pokemon.getId());
                 fragment.setArguments(args);
-                activity.changeView(fragment, pokemon.getName());
+                String cap = pokemon.getName().substring(0, 1).toUpperCase() + pokemon.getName().substring(1);
+                activity.changeView(fragment, cap);
             }
         });
         return view;

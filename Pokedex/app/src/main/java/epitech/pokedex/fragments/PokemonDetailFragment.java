@@ -52,7 +52,8 @@ public class PokemonDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
 
         TextView name = (TextView) view.findViewById(R.id.name);
-        name.setText(pokemon.getName());
+        String cap = pokemon.getName().substring(0, 1).toUpperCase() + pokemon.getName().substring(1);
+        name.setText(cap);
         ImageView img = (ImageView) view.findViewById(R.id.sprite);
         Picasso instance = new Picasso.Builder(getActivity())
                 .downloader(new OkHttpDownloader(getActivity()))
@@ -62,12 +63,21 @@ public class PokemonDetailFragment extends Fragment {
         height.setText("Height : " + pokemon.getHeight());
         TextView weight = (TextView) view.findViewById(R.id.weight);
         weight.setText("Weight : " + pokemon.getWeight());
-        //TODO Abilities
-            /*        ListView abs = (ListView) view.findViewById(R.id.abilities);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, test);*/
-
-
+        if (pokemon.getTypes_name().size() > 0) {
+            TextView ab = (TextView) view.findViewById(R.id.ab);
+            ab.setText("Abilities : ");
+            TextView ab1 = (TextView) view.findViewById(R.id.ab1);
+            ab1.setText(" - " + pokemon.getTypes_name().get(0));
+        }
+        if (pokemon.getTypes_name().size() > 1) {
+            TextView ab2 = (TextView) view.findViewById(R.id.ab2);
+            ab2.setText(" - " + pokemon.getTypes_name().get(1).toString());
+        }
+        if (pokemon.getTypes_name().size() > 2) {
+            TextView ab3 = (TextView) view.findViewById(R.id.ab3);
+            ab3.setText(" - " + pokemon.getTypes_name().get(2).toString());
+        }
+        String toto = pokemon.getTypes_name().get(0);
         return view;
     }
 

@@ -39,7 +39,8 @@ public class PokemonAdapter extends ArrayAdapter<GlobalPokemon>{
 
 
         GlobalPokemon pokemon = getItem(position);
-        viewHolder.name.setText(pokemon.getName());
+        String cap = pokemon.getName().substring(0, 1).toUpperCase() + pokemon.getName().substring(1);
+        viewHolder.name.setText(cap);
         Picasso instance = new Picasso.Builder(parent.getContext())
                 .downloader(new OkHttpDownloader(parent.getContext()))
                 .build();

@@ -45,7 +45,8 @@ public class BerryListFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putInt("id", berry.getId());
                 fragment.setArguments(args);
-                activity.changeView(fragment, berry.getName());
+                String cap = berry.getName().substring(0, 1).toUpperCase() + berry.getName().substring(1);
+                activity.changeView(fragment, cap);
             }
         });
 

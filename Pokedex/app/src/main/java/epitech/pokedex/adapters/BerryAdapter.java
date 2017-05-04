@@ -34,7 +34,8 @@ public class BerryAdapter extends ArrayAdapter<GlobalBerry>{
         }
 
         GlobalBerry berry = getItem(position);
-        viewHolder.name.setText(berry.getName());
+        String cap = berry.getName().substring(0, 1).toUpperCase() + berry.getName().substring(1);
+        viewHolder.name.setText(cap);
 
         return convertView;
     }

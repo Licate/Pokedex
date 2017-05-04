@@ -44,10 +44,47 @@
         tools:text="Weight"
         />
 
-    <ListView
-        android:id="@+id/abilities"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/ab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:text="Abilities"
+        />
+
+    <TextView
+        android:id="@+id/ab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:textSize="18sp"
+        tools:text="First ability"
+        />
+
+    <TextView
+        android:id="@+id/ab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:textSize="18sp"
+        tools:text="Second Ability"
+        />
+
+    <TextView
+        android:id="@+id/ab3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:textSize="18sp"
+        tools:text="Third Ability"
+        />
+
 
 
 </LinearLayout>

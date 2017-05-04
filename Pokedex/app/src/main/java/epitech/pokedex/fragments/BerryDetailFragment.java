@@ -44,7 +44,8 @@ public class BerryDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_berry_detail, container, false);
 
         TextView name = (TextView) view.findViewById(R.id.name);
-        name.setText(berry.getName());
+        String cap = berry.getName().substring(0, 1).toUpperCase() + berry.getName().substring(1);
+        name.setText(cap);
         ImageView img = (ImageView) view.findViewById(R.id.sprite);
         Picasso instance = new Picasso.Builder(getActivity())
                 .downloader(new OkHttpDownloader(getActivity()))

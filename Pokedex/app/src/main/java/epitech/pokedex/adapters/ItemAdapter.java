@@ -38,7 +38,8 @@ public class ItemAdapter extends ArrayAdapter<GlobalItem>{
         }
 
         GlobalItem item = getItem(position);
-        viewHolder.name.setText(item.getName());
+        String cap = item.getName().substring(0, 1).toUpperCase() + item.getName().substring(1);
+        viewHolder.name.setText(cap);
         Picasso instance = new Picasso.Builder(parent.getContext())
                 .downloader(new OkHttpDownloader(parent.getContext()))
                 .build();

@@ -43,7 +43,8 @@ public class ItemDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         TextView name = (TextView) view.findViewById(R.id.name);
-        name.setText(item.getName());
+        String cap = item.getName().substring(0, 1).toUpperCase() + item.getName().substring(1);
+        name.setText(cap);
         ImageView img = (ImageView) view.findViewById(R.id.sprite);
         Picasso instance = new Picasso.Builder(getActivity())
                 .downloader(new OkHttpDownloader(getActivity()))

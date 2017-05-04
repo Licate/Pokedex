@@ -45,7 +45,8 @@ public class ItemListFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putInt("id", item.getId());
                 fragment.setArguments(args);
-                activity.changeView(fragment, item.getName());
+                String cap = item.getName().substring(0, 1).toUpperCase() + item.getName().substring(1);
+                activity.changeView(fragment, cap);
             }
         });
         return view;
