@@ -25,7 +25,7 @@ public class PokemonActivity extends AppCompatActivity {
 
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
-    private String[] pkArray = { "Pokemon", "Items", "Berries", "Berry"};
+    private String[] pkArray = { "Pokemon", "Items", "Berries"};
     private DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -55,12 +55,6 @@ public class PokemonActivity extends AppCompatActivity {
                     Bundle args = new Bundle();
                     fragment.setArguments(args);
                     selectView(position, fragment, "Pokemon");
-                }
-                else if (pkArray[((int) id)] == "Berry") {
-                    Fragment fragment = new BerryDetailFragment();
-                    Bundle args = new Bundle();
-                    fragment.setArguments(args);
-                    selectView(position, fragment, "Berry Example");
                 }
             }
         });
@@ -117,5 +111,13 @@ public class PokemonActivity extends AppCompatActivity {
         mDrawerList.setItemChecked(position, true);
         getSupportActionBar().setTitle(title);
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    public void changeView(Fragment fragment, String title) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+        getSupportActionBar().setTitle(title);
     }
 }

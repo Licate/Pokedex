@@ -24,37 +24,49 @@ import epitech.pokedex.adapters.PokemonAdapter;
 import epitech.pokedex.apicomms.GetPokemon;
 import epitech.pokedex.entities.Pokemon;
 
+
 public class PokemonDetailFragment extends Fragment {
+
+    private Pokemon pokemon;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Integer id = this.getArguments().getInt("id");
+
+        GetPokemon pokeapi = new GetPokemon();
+        try {
+            this.pokemon = pokeapi.new Detail().execute(id.toString()).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
 
-        String id = "12";
-        GetPokemon pokeapi = new GetPokemon();
-        try {
-            Pokemon pokemon = pokeapi.new Detail().execute(id).get();
-            TextView name = (TextView) view.findViewById(R.id.name);
-            name.setText(pokemon.getName());
-            ImageView img = (ImageView) view.findViewById(R.id.sprite);
-            Picasso instance = new Picasso.Builder(getActivity())
-                    .downloader(new OkHttpDownloader(getActivity()))
-                    .build();
-            instance.load(pokemon.getDefault_sprite()).fit().into(img);
-            TextView height = (TextView) view.findViewById(R.id.height);
-            height.setText("Height : " + pokemon.getHeight());
-            TextView weight = (TextView) view.findViewById(R.id.weight);
-            weight.setText("Weight : " + pokemon.getWeight());
-            //TODO Abilities
+        TextView name = (TextView) view.findViewById(R.id.name);
+        name.setText(pokemon.getName());
+        ImageView img = (ImageView) view.findViewById(R.id.sprite);
+        Picasso instance = new Picasso.Builder(getActivity())
+                .downloader(new OkHttpDownloader(getActivity()))
+                .build();
+        instance.load(pokemon.getDefault_sprite()).fit().into(img);
+        TextView height = (TextView) view.findViewById(R.id.height);
+        height.setText("Height : " + pokemon.getHeight());
+        TextView weight = (TextView) view.findViewById(R.id.weight);
+        weight.setText("Weight : " + pokemon.getWeight());
+        //TODO Abilities
             /*        ListView abs = (ListView) view.findViewById(R.id.abilities);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, test);*/
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
 
         return view;
     }
