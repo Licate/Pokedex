@@ -25,7 +25,6 @@ public class PokemonListFragment extends Fragment {
 
         GetPokemon pokeapi = new GetPokemon();
 
-
         try {
             adapter = new PokemonAdapter(getActivity(), pokeapi.new Global().execute().get());
         } catch (InterruptedException e) {

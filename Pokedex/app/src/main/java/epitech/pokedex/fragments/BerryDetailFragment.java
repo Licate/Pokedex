@@ -19,8 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import epitech.pokedex.R;
+import epitech.pokedex.apicomms.GetBerry;
 import epitech.pokedex.entities.Berry;
 
 public class BerryDetailFragment extends Fragment{
@@ -30,28 +32,28 @@ public class BerryDetailFragment extends Fragment{
 
         View view = inflater.inflate(R.layout.fragment_berry_detail, container, false);
 
-        // TEST SUPPRIMER
-        Berry berry = new Berry();
-        berry.setId(1);
-        berry.setName("Strawberry");
-        berry.setSize(2);
-        berry.setGrowth_time(3);
-        berry.setSmoothness(2);
-
-        //add sprite by default
-        TextView name = (TextView) view.findViewById(R.id.name);
-        name.setText(berry.getName());
-        ImageView img = (ImageView) view.findViewById(R.id.sprite);
-        Picasso instance = new Picasso.Builder(getActivity())
-                .downloader(new OkHttpDownloader(getActivity()))
-                .build();
-        instance.load("http://blog.xebia.fr/wp-content/uploads/2015/03/rass.png").fit().into(img);
-        TextView size = (TextView) view.findViewById(R.id.size);
-        size.setText("Size : "+berry.getSize()+ " milimeters");
-        TextView growth = (TextView) view.findViewById(R.id.growth);
-        growth.setText("Growth time : "+berry.getGrowth_time() + " hours");
-        TextView sm = (TextView) view.findViewById(R.id.sm);
-        sm.setText("Smoothness : "+ berry.getSmoothness());
+        String id = "10";
+        GetBerry berryapi = new GetBerry();
+        try {
+            Berry berry = berryapi.new Detail().execute(id).get();
+            TextView name = (TextView) view.findViewById(R.id.name);
+            name.setText(berry.getName());
+            ImageView img = (ImageView) view.findViewById(R.id.sprite);
+            Picasso instance = new Picasso.Builder(getActivity())
+                    .downloader(new OkHttpDownloader(getActivity()))
+                    .build();
+            instance.load("http://blog.xebia.fr/wp-content/uploads/2015/03/rass.png").fit().into(img);
+            TextView size = (TextView) view.findViewById(R.id.size);
+            size.setText("Size : "+berry.getSize()+ " milimeters");
+            TextView growth = (TextView) view.findViewById(R.id.growth);
+            growth.setText("Growth time : "+berry.getGrowth_time() + " hours");
+            TextView sm = (TextView) view.findViewById(R.id.sm);
+            sm.setText("Smoothness : "+ berry.getSmoothness());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         return view;
     }

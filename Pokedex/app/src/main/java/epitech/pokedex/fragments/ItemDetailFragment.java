@@ -12,8 +12,10 @@ import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import epitech.pokedex.R;
+import epitech.pokedex.apicomms.GetItem;
 import epitech.pokedex.entities.Item;
 
 public class ItemDetailFragment extends Fragment {
@@ -23,23 +25,24 @@ public class ItemDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
-        // TEST SUPPRIMER
-        Item item = new Item();
-        item.setId(1);
-        item.setName("Pokeball");
-        item.setCost(10);
-        item.setDefault_sprite("http://pokeapi.co/media/sprites/items/master-ball.png");
-
-
-        TextView name = (TextView) view.findViewById(R.id.name);
-        name.setText(item.getName());
-        ImageView img = (ImageView) view.findViewById(R.id.sprite);
-        Picasso instance = new Picasso.Builder(getActivity())
-                .downloader(new OkHttpDownloader(getActivity()))
-                .build();
-        instance.load(item.getDefault_sprite()).fit().into(img);
-        TextView cost = (TextView) view.findViewById(R.id.cost);
-        cost.setText("Cost : " + item.getCost());
+        String id = "10";
+        GetItem itemapi = new GetItem();
+        try {
+            Item item = itemapi.new Detail().execute(id).get();
+            TextView name = (TextView) view.findViewById(R.id.name);
+            name.setText(item.getName());
+            ImageView img = (ImageView) view.findViewById(R.id.sprite);
+            Picasso instance = new Picasso.Builder(getActivity())
+                    .downloader(new OkHttpDownloader(getActivity()))
+                    .build();
+            instance.load(item.getDefault_sprite()).fit().into(img);
+            TextView cost = (TextView) view.findViewById(R.id.cost);
+            cost.setText("Cost : " + item.getCost());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return view;
     }
 }
