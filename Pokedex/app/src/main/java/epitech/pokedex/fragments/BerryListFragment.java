@@ -18,6 +18,7 @@ import epitech.pokedex.entities.GlobalBerry;
 
 public class BerryListFragment extends Fragment {
     ListView mListView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class BerryListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               GlobalBerry berry = (GlobalBerry) mListView.getItemAtPosition(position);
+                GlobalBerry berry = (GlobalBerry) mListView.getItemAtPosition(position);
                 Fragment fragment = new BerryDetailFragment();
                 Bundle args = new Bundle();
                 args.putInt("id", berry.getId());
@@ -47,6 +48,7 @@ public class BerryListFragment extends Fragment {
                 activity.changeView(fragment, berry.getName());
             }
         });
+
         return view;
     }
 }
